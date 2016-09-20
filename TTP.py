@@ -22,6 +22,7 @@ class Node:
 		self.value = value
 		self.left = None
 		self.right = None
+		self.marked = False # this is for BFS
 
 
 def postOrderTraversal(node, output):
@@ -44,6 +45,29 @@ def inOrderTraversal(node, output):
 		output.append(node.value)
 		inOrderTraversal(node.right, output)		
 	return output
+
+def BFS(root, output):
+	'''
+	an iterative solution using a queue. use list to implement queue. append and pop(0)
+	'''
+	queue = []
+	root.marked = True
+	queue.append(root)
+
+	while(len(queue) != 0):
+		node = queue.pop(0)
+		output.append(node.value)
+
+		if node.left != None and node.left.marked == False:
+			node.left.marked = True
+			queue.append(node.left)
+
+		if node.right != None and node.right.marked == False:
+			node.right.marked = True
+			queue.append(node.right)
+
+	return output
+
 
 
 A = Node('A')
@@ -80,7 +104,12 @@ for item in output:
 	print item,
 print '\n'
 
-
+output = []
+output = BFS(A, output)
+print 'BFS: ',
+for item in output:
+	print item,
+print '\n'
 
 
 
