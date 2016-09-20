@@ -31,7 +31,19 @@ def postOrderTraversal(node, output):
 		output.append(node.value)
 	return output
 
+def preOrderTraversal(node, output):
+	if node != None:
+		output.append(node.value)
+		preOrderTraversal(node.left, output)
+		preOrderTraversal(node.right, output)
+	return output
 
+def inOrderTraversal(node, output):
+	if node != None:
+		inOrderTraversal(node.left, output)
+		output.append(node.value)
+		inOrderTraversal(node.right, output)		
+	return output
 
 
 A = Node('A')
@@ -49,7 +61,24 @@ E.right = F
 
 output = []
 output = postOrderTraversal(A, output)
-print output
+print 'post-Order: ',
+for item in output:
+	print item,
+print '\n'
+
+output = []
+output = preOrderTraversal(A, output)
+print 'pre-Order: ',
+for item in output:
+	print item,
+print '\n'
+
+output = []
+output = inOrderTraversal(A, output)
+print 'in-Order: ',
+for item in output:
+	print item,
+print '\n'
 
 
 
