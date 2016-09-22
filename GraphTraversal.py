@@ -131,14 +131,14 @@ class Graph(object):
         for node in self.nodes:
             node.visited = False
 
-	def dfs_helper(self, start_node):
-		ret_list = [start_node.value]
-    	start_node.visited = True
-    	edges_out = [e for e in start_node.edges if e.node_to.value != start_node.value]
-    	for edge in edges_out:
-    		if not edge.node_to.visited:
-    			ret_list.extend(self.dfs_helper(edge.node_to))
-    	return ret_list
+    def dfs_helper(self, start_node):
+        ret_list = [start_node.value]
+        start_node.visited = True
+        edges_out = [e for e in start_node.edges if e.node_to.value != start_node.value]
+        for edge in edges_out:
+            if not edge.node_to.visited:
+                ret_list.extend(self.dfs_helper(edge.node_to))
+        return ret_list
 
 
 
@@ -156,27 +156,27 @@ class Graph(object):
         """Return the results of dfs with numbers converted to names."""
         return [self.node_names[num] for num in self.dfs(start_node_num)]
 
-	def bfs(self, start_node_num):
+    def bfs(self, start_node_num):
 
-		node = self.find_node(start_node_num)
-		self._clear_visited()
-		ret_list = []
+        node = self.find_node(start_node_num)
+        self._clear_visited()
+        ret_list = []
         # Your code here
-		queue = [node]
-		node.visited = True
-		def enqueue(n, q=queue):
-			n.visited = True
-			q.append(n)
-		def unvisited_outgoing_edge(n, e):
-			return ((e.node_from.value == n.value) and
-					(not e.node_to.visited))
-		while queue:
-			node = queue.pop(0)
-			ret_list.append(node.value)
-			for e in node.edges:
-				if unvisited_outgoing_edge(node, e):
-					enqueue(e.node_to)
-		return ret_list
+        queue = [node]
+        node.visited = True
+        def enqueue(n, q=queue):
+            n.visited = True
+            q.append(n)
+        def unvisited_outgoing_edge(n, e):
+            return ((e.node_from.value == n.value) and
+                (not e.node_to.visited))
+        while queue:
+            node = queue.pop(0)
+            ret_list.append(node.value)
+            for e in node.edges:
+                if unvisited_outgoing_edge(node, e):
+                    enqueue(e.node_to)
+        return ret_list
 
     def bfs_names(self, start_node_num):
         """Return the results of bfs with numbers converted to names."""
@@ -227,8 +227,8 @@ pp.pprint(graph.get_adjacency_list_names())
 print "\nAdjacency Matrix"
 pp.pprint(graph.get_adjacency_matrix())
 
-# print "\nDepth First Search"
-# pp.pprint(graph.dfs_names(2))
+print "\nDepth First Search"
+pp.pprint(graph.dfs_names(2))
 
 # Should print:
 # Depth First Search
