@@ -5,33 +5,36 @@ definition should look like question2(a), and return a string.
 '''
 
 '''
-dynamic programming solution, O(N^2) time and O(N^2) space.
-	base case P[i,i] is true
-			  P[i, i+1] is true is Si = Si+1
-	first initialize the one and two letters palindromes, then all three letters, and so on
+dynamic programming solution, O(N^2) time and O(1) space.
+	expand around center, there are 2N-1 such centers	
 '''
 
 def question2(a):
-	n = len(a)
-	longestBegin = 0
-	maxLen = 1
-	table = [[False for i in range(0, n)] for j in range(0, n)]
-	# base case
-	for i in range(0, n):
-		table[i][i] = True 
-	for i in range(0, n-1):
-		if (a[i] == a[i+1]):
-			table[i][i+1] = True
-			longestBegin = i
-			maxLen = 2
-	for length in range(3, n+1):
-		for i in range(0, n-length+1):
-			j = i+length-1
-			if (a[i] == a[j]) & (table[i+1][j-1]):
-				table[i][j] = True
-				longestBegin = i
-				maxLen = length
 
-	return a[longestBegin:longestBegin+maxLen]
+	def expandAroundCenter(s, c1, c2):
+		l = c1
+		r = c2
+		n = len(s)
+		while ((l >= 0)  & (r <= n-1)):
+			if (s[l] == s[r]):
+				l-=1
+				r+=1
+			else:
+				break
+		return s[l+1:r-l-1]
+
+	n = len(a)
+	if (n==0): return ""
+	longest = a[0]
+	for i in range(0, n-1):
+		p1 = expandAroundCenter(a, i, i)
+		if (len(p1) > len(longest)):
+			longest = p1
+		p2 = expandAroundCenter(a, i, i+1)
+		if (len(p2) > len(longest)):
+			longest = p2
+	return longest
+
+
 
 
