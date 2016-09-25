@@ -29,6 +29,6 @@ xnew = float(raw_input())
 if xnew < 4:
 	predict = regr.predict(xnew)
 else: 
-	predict = 8.0
+	predict = [8.0]
 
 print "{:.2f}".format(predict[0])
