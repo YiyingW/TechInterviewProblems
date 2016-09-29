@@ -19,4 +19,72 @@ question4([[0, 1, 0, 0, 0],
           4)
 and the answer would be 3.
 '''
+import numpy as np 
+
+def Question4(T, r, n1, n2):
+
+	class Node():
+		def __init__(self, value):
+			self.value = value
+			self.left = None
+			self.right = None
+
+
+	# helper methods ******
+	def MatrixToNodes(T):
+		# converts a matrix represented tree into node-based-tree
+		# input: Matrix 
+		# output: root node
+		newT = [Node(i) for i in range(0, len(T))]
+		for i in range(0, len(T)):
+			newT[i] = Node(i)
+			sub = []
+			for j in range(0, len(T[0])):
+				if T[i][j] == 1:
+					sub.append(j)
+			if len(sub) == 1:
+				newT[i].left = newT[sub[0]]
+			if len(sub) == 2:
+				newT[i].left = newT[sub[0]]
+				newT[i].right = newT[sub[1]]	
+		# which node is the root? The columns in the matrix that are all 0 are root candidates
+
+		return newT
+
+	def PreOrderTraversalSearch(node, target): # node is the node to start with, target is the value
+		if node:
+			if node.value == target:
+				return True
+			else:
+				return (PreOrderTraversalSearch(node.left, target) or PreOrderTraversalSearch(node.right, target))
+		return False
+
+
+	def FCA(node, p, q):  # node is the node n to start with, p, q are the values 
+		leftsub = node.left
+		rightsub = node.right
+		if (PreOrderTraversalSearch(leftsub, p) and PreOrderTraversalSearch(rightsub, q)) or (PreOrderTraversalSearch(leftsub, q) and PreOrderTraversalSearch(rightsub, p)):
+			return node.value
+		elif PreOrderTraversalSearch(leftsub, p): # p and q both on the left subtree
+			return FCA(leftsub, p, q)
+		else:
+			return FCA(rightsub, p, q)
+
+
+	newT = MatrixToNodes(T)
+	root = newT[r]
+
+
+
+	return FCA(root, n1, n2)
+
+
+T = [[0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0]]
+
+print Question4(T, 3, 1, 4)
+
 
