@@ -13,7 +13,6 @@ def question1(s, t):
 		a dict, compare this dict with dict(t), if equal return True
 	4. return False if no window has same dict with dict(t)
 
-	O(n) because need to check linear number of windows
 	'''
 	l = len(t)
 	dict_t = {}
@@ -23,7 +22,7 @@ def question1(s, t):
 		else:
 			dict_t[letter] += 1
 
-	for i in range(0, len(s)-l):
+	for i in range(0, len(s)-l+1):
 		sub_str = s[i:i+l]
 		sub_dic = {}
 		for letter in sub_str:
@@ -36,3 +35,6 @@ def question1(s, t):
 					sub_dic[letter] += 1
 		if sub_dic == dict_t: return True
 	return False
+
+
+print question1('', 'udacity')
