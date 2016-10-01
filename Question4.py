@@ -61,14 +61,26 @@ def Question4(T, r, n1, n2):
 
 
 	def FCA(node, p, q):  # node is the node n to start with, p, q are the values 
-		leftsub = node.left
-		rightsub = node.right
-		if (PreOrderTraversalSearch(leftsub, p) and PreOrderTraversalSearch(rightsub, q)) or (PreOrderTraversalSearch(leftsub, q) and PreOrderTraversalSearch(rightsub, p)):
-			return node.value
-		elif PreOrderTraversalSearch(leftsub, p): # p and q both on the left subtree
-			return FCA(leftsub, p, q)
-		else:
-			return FCA(rightsub, p, q)
+		
+		if node:
+			if (node.value == p) or (node.value == q):
+				return node.value
+
+			if (node.left != None) & (node.right != None): # when node has both left subtree and right subtree
+				leftsub = node.left
+				rightsub = node.right
+				if (PreOrderTraversalSearch(leftsub, p) and PreOrderTraversalSearch(rightsub, q)) or (PreOrderTraversalSearch(leftsub, q) and PreOrderTraversalSearch(rightsub, p)):
+					return node.value
+				elif PreOrderTraversalSearch(leftsub, p): # p and q both on the left subtree
+					return FCA(leftsub, p, q)
+				else:
+					return FCA(rightsub, p, q)
+			elif node.left == None:
+				rightsub = node.right
+				return FCA(rightsub, p, q)
+			elif node.right == None:
+				leftsub = node.left
+				return FCA(leftsub, p, q)
 
 
 	newT = MatrixToNodes(T)
@@ -79,12 +91,11 @@ def Question4(T, r, n1, n2):
 	return FCA(root, n1, n2)
 
 
-T = [[0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0]]
+T = [[0, 1, 0],
+	 [0, 0, 1],
+	 [0, 0, 0]
+    ]
 
-print Question4(T, 3, 1, 4)
+print Question4(T, 0, 1, 2)
 
 
