@@ -15,15 +15,18 @@ class Node(object):
 
 
 
-def question5subRoutine(ll, m, counter):
-	if ll == None:
-		return 0
-	counter += question5subRoutine(ll.next, m, counter) + 1
-	if counter == m:
-		print ll.data
-	return counter
+def question5(ll, m):
+	p1 = ll
+	p2 = ll
 
-
+	for i in range(0, m):
+		if (p1 == None): 
+			return None
+		p1 = p1.next
+	while (p1 != None):
+		p1 = p1.next
+		p2 = p2.next
+	return p2.data
 
 
 A = Node(2)
@@ -37,5 +40,7 @@ B.next = C
 C.next = D 
 D.next = E
 
-question5subRoutine(A, 3, 0)
+print question5(A, 3)
+
+
 
