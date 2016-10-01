@@ -21,7 +21,8 @@ def question2(a):
 				r+=1
 			else:
 				break
-		return s[l+1:r-l-1]
+		print l+1, r-l-1
+		return s[l+1:r]
 
 	n = len(a)
 	if (n==0): return ""
@@ -29,11 +30,18 @@ def question2(a):
 	for i in range(0, n-1):
 		p1 = expandAroundCenter(a, i, i)
 		if (len(p1) > len(longest)):
+			print i
+			print 'p1:', p1
 			longest = p1
 		p2 = expandAroundCenter(a, i, i+1)
 		if (len(p2) > len(longest)):
+			print 'p2:', p2
 			longest = p2
 	return longest
+
+a = 'nbvdfjkdkjfadf'
+
+question2('abccbadef')
 
 
 
