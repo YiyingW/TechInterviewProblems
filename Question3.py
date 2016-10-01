@@ -23,6 +23,7 @@ def Question3(G):
 	'''
 	N = len(G) # the number of vertices in graph
 	# randomly choose a vertext to start with
+	if N == 1: return G
 	source = G.keys()[0]
 	X = [source]
 	# initialize an empty dict for storage of selected edges
