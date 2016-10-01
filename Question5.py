@@ -7,3 +7,35 @@ a linked list has 5 elements, the 3rd element from the end is the 3rd element. T
  as a representation of a node in the linked list. Return the value of the node at that 
  position.
 '''
+
+class Node(object):
+	def __init__(self, data):
+		self.data = data
+		self.next = None 
+
+
+
+def question5subRoutine(ll, m, counter):
+	if ll == None:
+		return 0
+	counter += question5subRoutine(ll.next, m, counter) + 1
+	if counter == m:
+		print ll.data
+	return counter
+
+
+
+
+A = Node(2)
+B = Node(3)
+C = Node(8)
+D = Node(1)
+E = Node(6)
+
+A.next = B 
+B.next = C
+C.next = D 
+D.next = E
+
+question5subRoutine(A, 3, 0)
+
