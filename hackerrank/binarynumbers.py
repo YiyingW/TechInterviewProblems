@@ -20,6 +20,7 @@ def binaryConverter(n):
 	binary.reverse()
 	binary = map(str, binary)
 	return "".join(binary)
-
-print binaryConverter(114)
-
+n = int(raw_input())
+binary = binaryConverter(n)
+subs = binary.split('0')
+print max(map(len, subs))
