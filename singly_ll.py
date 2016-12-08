@@ -47,6 +47,41 @@ class SinglyLinkedList():
 
         self.length += 1
 
+    def insertAtEnd(self, data):
+        newNode = Node()
+        newNode.setData(data)
+
+        current = self.head
+
+        while current.getNext()!= None:
+            current = current.getNext()
+
+        current.setNext(newNode)
+        self.length += 1
+
+    # insert a node in the middle given a position
+    def insertAtPos(self, pos, data):
+        if pos > self.length or pos < 0:
+            return None
+        else:
+            if pos == 0:
+                self.insertAtBeginning(data)
+            else:
+                if pos == self.length:
+                    self.insertAtEnd(data)
+                else:
+                    newNode = Node()
+                    newNode.setData(data)
+                    count = 1
+                    current = self.head
+                    while count < pos:
+                        count += 1
+                        current = current.getNext()
+
+                    newNode.setNext(current.getNext())
+                    current.setNext(newNode)
+                    self.length += 1
+
 
 
 
