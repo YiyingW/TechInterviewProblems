@@ -25,4 +25,14 @@ class Solution:
         ans = 0;
         for x in A:
             ans = ans ^ x
-        return ans
+            print ans
+        #return ans
+c = Solution()
+c.singleNumber([1,2,3,2,1])
+
+'''
+1000  # 8 (binary)
+0011  # 3 (binary)
+----  # APPLY XOR ('vertically')
+1011  # result = 11 (binary)
+'''
