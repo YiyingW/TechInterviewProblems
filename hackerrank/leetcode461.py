@@ -1,0 +1,22 @@
+'''
+https://leetcode.com/problems/hamming-distance/
+Hamming Distance
+
+'''
+
+
+class Solution(object):
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        ans = 0
+        while x or y:
+            ans += (x%2) ^ (y%2)
+            x /= 2
+            y/= 2
+        return ans
+
+        
