@@ -8,27 +8,17 @@ class Solution(object):
 
         result = []
 
-        def oneCase(currentList, k, n):
-            print currentList
-            if k==0 and sum(currentList) == n:
-                if set(currentList) not in result:
-                    result.append(set(currentList))
-            else:
-                # if 1 not in currentList and sum(currentList)+1 <= n:
-                #     oneCase(currentList+[1], k-1, n)
-                # if 2 not in currentList and sum(currentList)+2 <= n:
-                #     oneCase(currentList+[2], k-1, n)
-                # if 3 not in currentList and sum(currentList)+3 <= n:
-                #     oneCase(currentList+[3], k-1, n)
-                # if 4 not in currentList and sum(currentList)+4 <= n:
-                #     oneCase(currentList+[4], k-1, n)
-                for i in range(1,10):
-                    if i not in currentList and sum(currentList) < n:
-                        oneCase(currentList+[i], k-1, n)
-
-        oneCase([],k,n)
-        result = [list(i) for i in result]
+        def search(start, cnt, sums, nums):
+            if cnt > k or sums > n:
+                return
+            if cnt == k and sums == n:
+                result.append(nums)
+                return
+            for x in range(start+1, 10):
+                search(x, cnt+1, sums+x, nums+[x])
+        search(0, 0, 0, [])
         return result
+
 
 
 c = Solution()
