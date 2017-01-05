@@ -12,11 +12,6 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        ans = 0
-        while x or y:
-            ans += (x%2) ^ (y%2)
-            x /= 2
-            y/= 2
-        return ans
+        return bin(x^y).count("1")
 
         
