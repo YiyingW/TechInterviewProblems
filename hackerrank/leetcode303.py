@@ -1,3 +1,8 @@
+"""
+Since sumRange could be called many times on the same argument, we could
+cache the result!
+"""
+
 class NumArray(object):
     def __init__(self, nums):
         """
@@ -5,10 +10,12 @@ class NumArray(object):
         :type nums: List[int]
         """
         self.nums = nums
-
-
-
-
+        self.result = []
+        if self.nums != []:
+            self.result.append(self.nums[0])
+        for i in range(1, len(self.nums)):
+            self.result.append(self.result[i-1] + self.nums[i])
+        print self.result
 
 
     def sumRange(self, i, j):
@@ -20,13 +27,7 @@ class NumArray(object):
         """
         if i == j:
             return self.nums[i]
-        return self.nums[i] + self.sumRange(i+1, j)
-
-        
-
-
-# Your NumArray object will be instantiated and called as such:
-nums = [1,2,3,4,5]
-numArray = NumArray(nums)
-print numArray.sumRange(0, 1)
-print numArray.sumRange(1, 2)
+        if i == 0:
+            return self.result[j]
+        else:
+            return self.result[j] - self.result[i-1]
